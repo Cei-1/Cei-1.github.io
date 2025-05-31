@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEI: Consultoría Éxito e Innovación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #e2e8f0; /* Light gray for main text */
+            overflow-x: hidden; /* Prevent horizontal scroll due to canvas */
+        }
+
+        /* Custom scrollbar for better aesthetics in dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2d3748; /* Dark gray track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f61c69; /* Vibrant pink thumb */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c0155c; /* Deeper pink on hover */
+        }
+
+        /* Canvas for animated background */
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Send to back */
+            background: linear-gradient(135deg, #1a202c, #2d3748, #1a202c); /* Dark grays */
+        }
+
+        /* Custom glow effect for sections to enhance tech feel */
+        .section-glow {
+            box-shadow: 0 0 15px rgba(246, 28, 105, 0.3), 0 0 30px rgba(192, 21, 92, 0.2); /* Pink glow */
+        }
+
+        /* Specific styles for Mision, Vision sections */
+        .feature-section {
+            background-color: rgba(31, 41, 55, 0.9); /* Darker gray with slight transparency */
+            padding: 2.5rem; /* Increased padding */
+            border-radius: 1rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            border-left: 4px solid #f61c69; /* Vibrant pink left border */
+            border-bottom: 2px solid #c0155c; /* Deeper pink bottom border */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Smooth hover transition */
+            animation: pulse 2s infinite alternate ease-in-out; /* Subtle pulsing animation */
+        }
+
+        .feature-section:hover {
+            transform: translateY(-8px) scale(1.02); /* Lift and slight scale effect on hover */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3), 0 6px 10px rgba(0, 0, 0, 0.15), 0 0 40px rgba(246, 28, 105, 0.5); /* Enhanced shadow and stronger pink glow on hover */
+            background-color: rgba(45, 55, 72, 0.95); /* Slightly lighter background on hover */
+            animation: none; /* Stop pulsing on hover */
+        }
+
+        /* Keyframes for subtle pulsing animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            }
+            100% {
+                transform: scale(1.005);
+                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 10px rgba(246, 28, 105, 0.2);
+            }
+        }
+
+        /* Specific styles for each individual Value item */
+        .value-item {
+            background-color: rgba(31, 41, 55, 0.9); /* Darker gray with slight transparency */
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            border: 1px solid #c0155c; /* Subtle pink border */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            text-align: center; /* Center content within each value item */
+        }
+
+        .value-item:hover {
+            transform: translateY(-10px) scale(1.03); /* More pronounced lift and scale */
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4), 0 8px 12px rgba(0, 0, 0, 0.2), 0 0 50px rgba(246, 28, 105, 0.7); /* Stronger glow */
+            border-color: #f61c69; /* Highlight border on hover */
+        }
+
+        .value-item .emoji-large {
+            font-size: 3.5rem; /* Much larger emoji */
+            line-height: 1;
+            margin-bottom: 1rem;
+            display: block; /* Ensure it takes its own line */
+            color: #f61c69; /* Attempt to color emoji, though browser dependent */
+            text-shadow: 0 0 10px rgba(246, 28, 105, 0.6); /* Subtle glow for emoji */
+        }
+
+        .value-item h3 {
+            font-size: 1.75rem; /* Larger title for value */
+            font-weight: 700; /* Bold */
+            color: #f61c69; /* Vibrant pink */
+            margin-bottom: 0.75rem;
+        }
+
+        .value-item p {
+            font-size: 1rem; /* Standard text size */
+            color: #cbd5e1; /* Lighter gray for description */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <canvas id="background-canvas"></canvas>
+
+    <div class="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto">
+        <header class="w-full max-w-4xl text-center mb-12">
+            <img src="logoCEI.png"
+                 onerror="this.onerror=null;this.src='https://placehold.co/200x200/1A202C/F61C69?text=CEI+Logo';"
+                 alt="Logo de CEI: Consultoría Éxito e Innovación"
+                 class="mx-auto mb-6 w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-lg object-cover border-4 border-[#f61c69]">
+
+            <h1 class="text-5xl sm:text-6xl font-extrabold text-[#f61c69] mb-4 leading-tight">
+                CEI
+            </h1>
+            <p class="text-2xl sm:text-3xl font-semibold text-gray-300 mb-2">
+                Consultoría Éxito e Innovación
+            </p>
+            <p class="text-lg sm:text-xl text-gray-400">
+                "Impulsando tu futuro digital"
+            </p>
+        </header>
+
+        <main class="w-full max-w-6xl bg-gray-900 bg-opacity-90 shadow-xl rounded-2xl p-8 sm:p-10 lg:p-12 space-y-12 section-glow">
+
+            <section id="quienes-somos" class="text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Quiénes Somos</h2>
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-300">
+                    En CEI, transformamos ideas en realidad digital. Somos una empresa dedicada con pasión al <strong class="text-[#f61c69]">desarrollo de software</strong> y a la <strong class="text-[#f61c69]">investigación de innovaciones en TI</strong>. Nuestro objetivo es impulsar el éxito de nuestros clientes a través de soluciones tecnológicas de vanguardia que les permitan destacarse en el mundo digital.
+                </p>
+            </section>
+
+            <section id="nuestra-historia" class="text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Nuestra Historia</h2>
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-300">
+                    Nuestra trayectoria comenzó en <strong class="text-[#f61c69]">2022</strong>, cuando un grupo de estudiantes de la <strong class="text-[#f61c69]">Universidad Tecnológica de Tecámac</strong> unimos nuestras mentes y sueños para formar un pequeño proyecto escolar al que llamamos "Consultoría Eterna Innovación". Lo que inició como una iniciativa académica pronto floreció, gracias a los diversos proyectos que obtuvimos y el impacto que generamos. Esta evolución nos llevó a convertirnos en CEI: Consultoría Éxito e Innovación, reflejando nuestro compromiso constante con el éxito y la búsqueda incesante de la innovación en cada paso.
+                </p>
+            </section>
+
+            <section id="mision" class="text-center feature-section">
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Nuestra Misión</h2>
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-300">
+                    <span class="text-2xl mr-2">🚀</span> Proveer soluciones de desarrollo de software e investigación en TI de alta calidad, impulsando la innovación y el éxito de nuestros clientes, mediante un equipo comprometido y procesos de vanguardia.
+                </p>
+            </section>
+
+            <section id="vision" class="text-center feature-section">
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Nuestra Visión</h2>
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-300">
+                    <span class="text-2xl mr-2">🌟</span> Ser la consultora líder en desarrollo de software e investigación de innovaciones tecnológicas, reconocida por nuestra excelencia, creatividad y capacidad para transformar los desafíos de nuestros clientes en oportunidades de crecimiento.
+                </p>
+            </section>
+
+            <section id="valores" class="text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-8">Nuestros Valores</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="value-item">
+                        <span class="emoji-large">💡</span>
+                        <h3>Innovación</h3>
+                        <p>Buscamos constantemente nuevas ideas y tecnologías para ofrecer soluciones creativas y eficientes.</p>
+                    </div>
+                    <div class="value-item">
+                        <span class="emoji-large">🏆</span>
+                        <h3>Excelencia</h3>
+                        <p>Nos comprometemos a entregar trabajos de la más alta calidad, superando las expectativas de nuestros clientes.</p>
+                    </div>
+                    <div class="value-item">
+                        <span class="emoji-large">🤝</span>
+                        <h3>Colaboración</h3>
+                        <p>Creemos en el poder del trabajo en equipo, tanto internamente como con nuestros clientes, para alcanzar metas extraordinarias.</p>
+                    </div>
+                    <div class="value-item">
+                        <span class="emoji-large">🛡️</span>
+                        <h3>Integridad</h3>
+                        <p>Actuamos con honestidad y transparencia en todas nuestras interacciones.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="redes-sociales" class="text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Síguenos en Redes Sociales</h2>
+                <div class="flex justify-center space-x-6 sm:space-x-8">
+                    <a href="https://www.facebook.com/consultoriaCEI/" target="_blank" rel="noopener noreferrer"
+                       class="text-[#f61c69] hover:text-[#c0155c] transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-facebook-f text-4xl sm:text-5xl"></i>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                    <a href="https://www.instagram.com/consultoria.cei/" target="_blank" rel="noopener noreferrer"
+                       class="text-[#f61c69] hover:text-[#c0155c] transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-instagram text-4xl sm:text-5xl"></i>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@devconcei?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer"
+                       class="text-[#f61c69] hover:text-[#c0155c] transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-tiktok text-4xl sm:text-5xl"></i>
+                        <span class="sr-only">TikTok</span>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="w-full max-w-4xl text-center mt-12 py-6 border-t border-gray-700 text-gray-400 text-sm">
+            <p>&copy; 2025 CEI: Consultoría Éxito e Innovación. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Get the canvas element and its 2D rendering context
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particles = []; // Array to hold all particle objects
+        const numParticles = 80; // Number of particles to animate
+        const maxDistance = 100; // Max distance for lines between particles
+
+        // Particle class definition
+        class Particle {
+            constructor(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                // Random velocity for movement
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+            }
+
+            // Update particle position
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                    this.vx *= -1;
+                }
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.vy *= -1;
+                }
+            }
+
+            // Draw particle
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        function initParticles() {
+            particles = []; // Clear existing particles
+            const colors = ['#f61c69', '#c0155c', 'rgba(255, 255, 255, 0.1)', 'rgba(255, 255, 255, 0.05)']; // Pink and subtle white for tech feel
+            for (let i = 0; i < numParticles; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const radius = Math.random() * 2 + 1; // Random radius between 1 and 3
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particles.push(new Particle(x, y, radius, color));
+            }
+        }
+
+        // Handle canvas resizing
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles(); // Re-initialize particles on resize to fit new dimensions
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate); // Request next frame
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update(); // Update particle position
+                particles[i].draw(); // Draw particle
+
+                // Draw lines between nearby particles
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        // Line opacity based on distance
+                        ctx.strokeStyle = `rgba(246, 28, 105, ${1 - (distance / maxDistance)})`; /* Pink lines */
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas); // Resize canvas on window resize
+        window.onload = function() {
+            resizeCanvas(); // Initial resize and particle setup
+            animate(); // Start the animation loop
+        }
+    </script>
+</body>
+</html>
