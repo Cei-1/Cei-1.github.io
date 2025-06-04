@@ -7,119 +7,57 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #e2e8f0; /* Light gray for main text */
-            overflow-x: hidden; /* Prevent horizontal scroll due to canvas */
-        }
-
-        /* Custom scrollbar for better aesthetics in dark theme */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #2d3748; /* Dark gray track */
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #f61c69; /* Vibrant pink thumb */
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #c0155c; /* Deeper pink on hover */
-        }
-
-        /* Canvas for animated background */
-        #background-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Send to back */
-            background: linear-gradient(135deg, #1a202c, #2d3748, #1a202c); /* Dark grays */
-        }
-
-        /* Custom glow effect for sections to enhance tech feel */
-        .section-glow {
-            box-shadow: 0 0 15px rgba(246, 28, 105, 0.3), 0 0 30px rgba(192, 21, 92, 0.2); /* Pink glow */
-        }
-
-        /* Specific styles for Mision, Vision sections */
-        .feature-section {
-            background-color: rgba(31, 41, 55, 0.9); /* Darker gray with slight transparency */
-            padding: 2.5rem; /* Increased padding */
-            border-radius: 1rem; /* Rounded corners */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
-            border-left: 4px solid #f61c69; /* Vibrant pink left border */
-            border-bottom: 2px solid #c0155c; /* Deeper pink bottom border */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Smooth hover transition */
-            animation: pulse 2s infinite alternate ease-in-out; /* Subtle pulsing animation */
-        }
-
-        .feature-section:hover {
-            transform: translateY(-8px) scale(1.02); /* Lift and slight scale effect on hover */
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3), 0 6px 10px rgba(0, 0, 0, 0.15), 0 0 40px rgba(246, 28, 105, 0.5); /* Enhanced shadow and stronger pink glow on hover */
-            background-color: rgba(45, 55, 72, 0.95); /* Slightly lighter background on hover */
-            animation: none; /* Stop pulsing on hover */
-        }
-
-        /* Keyframes for subtle pulsing animation */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            }
-            100% {
-                transform: scale(1.005);
-                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 10px rgba(246, 28, 105, 0.2);
-            }
-        }
-
-        /* Specific styles for each individual Value item */
-        .value-item {
-            background-color: rgba(31, 41, 55, 0.9); /* Darker gray with slight transparency */
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            border: 1px solid #c0155c; /* Subtle pink border */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
-            text-align: center; /* Center content within each value item */
-        }
-
-        .value-item:hover {
-            transform: translateY(-10px) scale(1.03); /* More pronounced lift and scale */
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4), 0 8px 12px rgba(0, 0, 0, 0.2), 0 0 50px rgba(246, 28, 105, 0.7); /* Stronger glow */
-            border-color: #f61c69; /* Highlight border on hover */
-        }
-
-        .value-item .emoji-large {
-            font-size: 3.5rem; /* Much larger emoji */
-            line-height: 1;
-            margin-bottom: 1rem;
-            display: block; /* Ensure it takes its own line */
-            color: #f61c69; /* Attempt to color emoji, though browser dependent */
-            text-shadow: 0 0 10px rgba(246, 28, 105, 0.6); /* Subtle glow for emoji */
-        }
-
-        .value-item h3 {
-            font-size: 1.75rem; /* Larger title for value */
-            font-weight: 700; /* Bold */
-            color: #f61c69; /* Vibrant pink */
-            margin-bottom: 0.75rem;
-        }
-
-        .value-item p {
-            font-size: 1rem; /* Standard text size */
-            color: #cbd5e1; /* Lighter gray for description */
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
     <canvas id="background-canvas"></canvas>
 
-    <div class="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto">
+    <nav id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-800 bg-opacity-95 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 shadow-lg border-r border-[#f61c69]">
+        <div class="p-6">
+            <h2 class="text-3xl font-extrabold text-[#f61c69] mb-8">CEI Menú</h2>
+            <ul>
+                <li class="mb-4">
+                    <a href="#quienes-somos" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
+                        <i class="fas fa-users mr-3 text-xl"></i> Quiénes Somos
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#nuestra-historia" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
+                        <i class="fas fa-history mr-3 text-xl"></i> Nuestra Historia
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#mision" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
+                        <i class="fas fa-bullseye mr-3 text-xl"></i> Misión
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#vision" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
+                        <i class="fas fa-eye mr-3 text-xl"></i> Visión
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#valores" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
+                        <i class="fas fa-handshake mr-3 text-xl"></i> Valores
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#redes-sociales" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
+                        <i class="fas fa-share-alt mr-3 text-xl"></i> Redes Sociales
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <button id="close-sidebar" class="absolute top-4 right-4 text-gray-400 hover:text-[#f61c69] focus:outline-none">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+    </nav>
+
+    <div id="main-content-wrapper" class="relative z-10 min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto transition-all duration-300 ease-in-out">
+        <button id="menu-toggle" class="fixed top-6 left-6 text-[#f61c69] bg-gray-800 p-3 rounded-full shadow-lg z-40">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+
         <header class="w-full max-w-4xl text-center mb-12">
             <img src="logoCEI.png"
                  onerror="this.onerror=null;this.src='https://placehold.co/200x200/1A202C/F61C69?text=CEI+Logo';"
@@ -221,104 +159,6 @@
         </footer>
     </div>
 
-    <script>
-        // Get the canvas element and its 2D rendering context
-        const canvas = document.getElementById('background-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let particles = []; // Array to hold all particle objects
-        const numParticles = 80; // Number of particles to animate
-        const maxDistance = 100; // Max distance for lines between particles
-
-        // Particle class definition
-        class Particle {
-            constructor(x, y, radius, color) {
-                this.x = x;
-                this.y = y;
-                this.radius = radius;
-                this.color = color;
-                // Random velocity for movement
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-            }
-
-            // Update particle position
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Bounce off edges
-                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-                    this.vx *= -1;
-                }
-                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-                    this.vy *= -1;
-                }
-            }
-
-            // Draw particle
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-        }
-
-        // Initialize particles
-        function initParticles() {
-            particles = []; // Clear existing particles
-            const colors = ['#f61c69', '#c0155c', 'rgba(255, 255, 255, 0.1)', 'rgba(255, 255, 255, 0.05)']; // Pink and subtle white for tech feel
-            for (let i = 0; i < numParticles; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const radius = Math.random() * 2 + 1; // Random radius between 1 and 3
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, radius, color));
-            }
-        }
-
-        // Handle canvas resizing
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles(); // Re-initialize particles on resize to fit new dimensions
-        }
-
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate); // Request next frame
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update(); // Update particle position
-                particles[i].draw(); // Draw particle
-
-                // Draw lines between nearby particles
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < maxDistance) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        // Line opacity based on distance
-                        ctx.strokeStyle = `rgba(246, 28, 105, ${1 - (distance / maxDistance)})`; /* Pink lines */
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        // Event listeners
-        window.addEventListener('resize', resizeCanvas); // Resize canvas on window resize
-        window.onload = function() {
-            resizeCanvas(); // Initial resize and particle setup
-            animate(); // Start the animation loop
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
