@@ -36,17 +36,32 @@ body {
     box-shadow: 0 0 15px rgba(246, 28, 105, 0.3), 0 0 30px rgba(192, 21, 92, 0.2); /* Pink glow */
 }
 
-/* Specific styles for Mision, Vision sections */
+/* Base styles for Mision, Vision sections (for mobile first) */
 .feature-section {
     background-color: rgba(31, 41, 55, 0.9); /* Darker gray with slight transparency */
-    padding: 2.5rem; /* Increased padding */
-    border-radius: 1rem; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
-    border-left: 4px solid #f61c69; /* Vibrant pink left border */
-    border-bottom: 2px solid #c0155c; /* Deeper pink bottom border */
+    padding: 1.5rem; /* Reduced padding for mobile */
+    border-radius: 0.75rem; /* Slightly less rounded corners for mobile */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.08); /* Subtle shadow for mobile */
+    border-left: 2px solid #f61c69; /* Thinner border for mobile */
+    border-bottom: 1px solid #c0155c; /* Thinner border for mobile */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Smooth hover transition */
     animation: pulse 2s infinite alternate ease-in-out; /* Subtle pulsing animation */
 }
+
+.feature-section h2 {
+    font-size: 2rem; /* Adjust title size for mobile */
+    margin-bottom: 0.75rem; /* Adjust margin for mobile */
+}
+
+.feature-section p {
+    font-size: 1rem; /* Adjust paragraph size for mobile */
+}
+
+.feature-section .text-2xl.mr-2 {
+    font-size: 1.75rem; /* Adjust emoji size for mobile */
+    margin-right: 0.5rem;
+}
+
 
 .feature-section:hover {
     transform: translateY(-8px) scale(1.02); /* Lift and slight scale effect on hover */
@@ -64,6 +79,30 @@ body {
     100% {
         transform: scale(1.005);
         box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 10px rgba(246, 28, 105, 0.2);
+    }
+}
+
+/* Styles for larger screens (sm and up) */
+@media (min-width: 640px) { /* Tailwind's 'sm' breakpoint */
+    .feature-section {
+        padding: 2.5rem; /* Revert to original padding */
+        border-radius: 1rem; /* Revert to original border-radius */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Revert to original shadow */
+        border-left: 4px solid #f61c69; /* Revert to original border thickness */
+        border-bottom: 2px solid #c0155c; /* Revert to original border thickness */
+    }
+
+    .feature-section h2 {
+        font-size: 2.25rem; /* Revert to original h2 size for sm and up */
+        margin-bottom: 1.5rem; /* Revert to original h2 margin */
+    }
+
+    .feature-section p {
+        font-size: 1.125rem; /* Revert to original paragraph size for sm and up */
+    }
+
+    .feature-section .text-2xl.mr-2 {
+        font-size: 2rem; /* Revert to original emoji size for sm and up */
     }
 }
 
