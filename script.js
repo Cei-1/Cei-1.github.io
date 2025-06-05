@@ -83,13 +83,10 @@ function animate() {
 const sidebar = document.getElementById('sidebar');
 const menuToggle = document.getElementById('menu-toggle');
 const closeSidebar = document.getElementById('close-sidebar');
-// Ya no necesitamos 'mainContentWrapper' para ajustar el margen.
 const navLinks = sidebar.querySelectorAll('a');
 
 function toggleSidebar() {
-    // Simplemente alterna la visibilidad de la barra lateral
     sidebar.classList.toggle('-translate-x-full');
-    // El contenido principal ya no se verá afectado por el margen.
 }
 
 menuToggle.addEventListener('click', toggleSidebar);
@@ -97,7 +94,6 @@ closeSidebar.addEventListener('click', toggleSidebar);
 
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        // Cierra la barra lateral cuando se hace clic en un enlace
         toggleSidebar();
     });
 });
