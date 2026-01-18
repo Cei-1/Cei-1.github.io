@@ -1,164 +1,706 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CEI: Consultoría Éxito e Innovación</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="antialiased">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="antialiased">
     <canvas id="background-canvas"></canvas>
 
-    <nav id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-800 bg-opacity-95 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50 shadow-lg border-r border-[#f61c69]">
-        <div class="p-6">
-            <h2 class="text-3xl font-extrabold text-[#f61c69] mb-8">CEI Menú</h2>
-            <ul>
-                <li class="mb-4">
-                    <a href="#quienes-somos" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
-                        <i class="fas fa-users mr-3 text-xl"></i> Quiénes Somos
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#nuestra-historia" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
-                        <i class="fas fa-history mr-3 text-xl"></i> Nuestra Historia
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#mision" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
-                        <i class="fas fa-bullseye mr-3 text-xl"></i> Misión
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#vision" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
-                        <i class="fas fa-eye mr-3 text-xl"></i> Visión
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#valores" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
-                        <i class="fas fa-handshake mr-3 text-xl"></i> Valores
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#redes-sociales" class="block text-lg font-medium text-gray-300 hover:text-[#f61c69] transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-700 flex items-center">
-                        <i class="fas fa-share-alt mr-3 text-xl"></i> Redes Sociales
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <button id="close-sidebar" class="absolute top-4 right-4 text-gray-400 hover:text-[#f61c69] focus:outline-none">
-            <i class="fas fa-times text-2xl"></i>
-        </button>
-    </nav>
-
-    <div id="main-content-wrapper" class="relative z-10 min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto transition-all duration-300 ease-in-out">
-        <button id="menu-toggle" class="fixed top-6 left-6 text-[#f61c69] bg-gray-800 p-3 rounded-full shadow-lg z-40">
-            <i class="fas fa-bars text-2xl"></i>
-        </button>
-
-        <header class="w-full max-w-4xl text-center mb-12">
-            <img src="logoCEI.png"
-                 onerror="this.onerror=null;this.src='https://placehold.co/200x200/1A202C/F61C69?text=CEI+Logo';"
-                 alt="Logo de CEI: Consultoría Éxito e Innovación"
-                 class="mx-auto mb-6 w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-lg object-cover border-4 border-[#f61c69]">
-
-            <h1 class="text-5xl sm:text-6xl font-extrabold text-[#f61c69] mb-4 leading-tight">
-                CEI
-            </h1>
-            <p class="text-2xl sm:text-3xl font-semibold text-gray-300 mb-2">
-                Consultoría Éxito e Innovación
-            </p>
-            <p class="text-lg sm:text-xl text-gray-400">
-                "Impulsando tu futuro digital"
-            </p>
-        </header>
-
-        <main class="w-full max-w-6xl bg-gray-900 bg-opacity-90 shadow-xl rounded-2xl p-8 sm:p-10 lg:p-12 space-y-12 section-glow">
-
-            <section id="quienes-somos" class="text-center">
-                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Quiénes Somos</h2>
-                <p class="text-lg sm:text-xl leading-relaxed text-gray-300">
-                    En CEI, transformamos ideas en realidad digital. Somos una empresa dedicada con pasión al <strong class="text-[#f61c69]">desarrollo de software</strong> y a la <strong class="text-[#f61c69]">investigación de innovaciones en TI</strong>. Nuestro objetivo es impulsar el éxito de nuestros clientes a través de soluciones tecnológicas de vanguardia que les permitan destacarse en el mundo digital.
-                </p>
-            </section>
-
-            <section id="nuestra-historia" class="text-center">
-                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Nuestra Historia</h2>
-                <p class="text-lg sm:text-xl leading-relaxed text-gray-300">
-                    Nuestra trayectoria comenzó en <strong class="text-[#f61c69]">2022</strong>, cuando un grupo de estudiantes de la <strong class="text-[#f61c69]">Universidad Tecnológica de Tecámac</strong> unimos nuestras mentes y sueños para formar un pequeño proyecto escolar al que llamamos "Consultoría Eterna Innovación". Lo que inició como una iniciativa académica pronto floreció, gracias a los diversos proyectos que obtuvimos y el impacto que generamos. Esta evolución nos llevó a convertirnos en CEI: Consultoría Éxito e Innovación, reflejando nuestro compromiso constante con el éxito y la búsqueda incesante de la innovación en cada paso.
-                </p>
-            </section>
-
-            <section id="mision" class="text-center feature-section">
-                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Nuestra Misión</h2>
-                <p class="text-lg sm:text-xl leading-relaxed text-gray-300">
-                    <span class="text-2xl mr-2">🚀</span> Proveer soluciones de desarrollo de software e investigación en TI de alta calidad, impulsando la innovación y el éxito de nuestros clientes, mediante un equipo comprometido y procesos de vanguardia.
-                </p>
-            </section>
-
-            <section id="vision" class="text-center feature-section">
-                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Nuestra Visión</h2>
-                <p class="text-lg sm:text-xl leading-relaxed text-gray-300">
-                    <span class="text-2xl mr-2">🌟</span> Ser la consultora líder en desarrollo de software e investigación de innovaciones tecnológicas, reconocida por nuestra excelencia, creatividad y capacidad para transformar los desafíos de nuestros clientes en oportunidades de crecimiento.
-                </p>
-            </section>
-
-            <section id="valores" class="text-center">
-                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-8">Nuestros Valores</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="value-item">
-                        <span class="emoji-large">💡</span>
-                        <h3>Innovación</h3>
-                        <p>Buscamos constantemente nuevas ideas y tecnologías para ofrecer soluciones creativas y eficientes.</p>
-                    </div>
-                    <div class="value-item">
-                        <span class="emoji-large">🏆</span>
-                        <h3>Excelencia</h3>
-                        <p>Nos comprometemos a entregar trabajos de la más alta calidad, superando las expectativas de nuestros clientes.</p>
-                    </div>
-                    <div class="value-item">
-                        <span class="emoji-large">🤝</span>
-                        <h3>Colaboración</h3>
-                        <p>Creemos en el poder del trabajo en equipo, tanto internamente como con nuestros clientes, para alcanzar metas extraordinarias.</p>
-                    </div>
-                    <div class="value-item">
-                        <span class="emoji-large">🛡️</span>
-                        <h3>Integridad</h3>
-                        <p>Actuamos con honestidad y transparencia en todas nuestras interacciones.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="redes-sociales" class="text-center">
-                <h2 class="text-3xl sm:text-4xl font-bold text-[#f61c69] mb-6">Síguenos en Redes Sociales</h2>
-                <div class="flex justify-center space-x-6 sm:space-x-8">
-                    <a href="https://www.facebook.com/consultoriaCEI/" target="_blank" rel="noopener noreferrer"
-                       class="text-[#f61c69] hover:text-[#c0155c] transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-facebook-f text-4xl sm:text-5xl"></i>
-                        <span class="sr-only">Facebook</span>
-                    </a>
-                    <a href="https://www.instagram.com/consultoria.cei/" target="_blank" rel="noopener noreferrer"
-                       class="text-[#f61c69] hover:text-[#c0155c] transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-instagram text-4xl sm:text-5xl"></i>
-                        <span class="sr-only">Instagram</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@devconcei?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer"
-                       class="text-[#f61c69] hover:text-[#c0155c] transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-tiktok text-4xl sm:text-5xl"></i>
-                        <span class="sr-only">TikTok</span>
-                    </a>
-                </div>
-            </section>
-
-        </main>
-
-        <footer class="w-full max-w-4xl text-center mt-12 py-6 border-t border-gray-700 text-gray-400 text-sm">
-            <p>&copy; 2025 CEI: Consultoría Éxito e Innovación. Todos los derechos reservados.</p>
-        </footer>
+    <div class="fixed-branding">
+      <div class="logo-frame">
+        <img
+          src="logoCEI.png"
+          onerror="
+            this.onerror = null;
+            this.src = 'https://placehold.co/100x100/1A202C/F61C69?text=CEI';
+          "
+          alt="CEI"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div class="branding-text hidden lg:block ml-3">
+        CONSULTORIA ETERNA INNOVACIÓN
+      </div>
     </div>
 
+    <div
+      class="discreet-nav fixed top-[30px] right-[30px] z-[100] flex items-center gap-5"
+    >
+      <a href="#contacto" class="nav-trigger hidden sm:flex">
+        <span></span> CONECTAR
+      </a>
+      <div id="btn-open-menu" class="nav-trigger">MENU <span></span></div>
+    </div>
+
+    <div class="side-progress hidden sm:flex">
+      <a href="#inicio" class="progress-dot active" data-label="Inicio"></a>
+      <a href="#showroom" class="progress-dot" data-label="Prototipos"></a>
+      <a href="#quienes-somos" class="progress-dot" data-label="Nosotros"></a>
+      <a href="#mision" class="progress-dot" data-label="Objetivos"></a>
+      <a href="#contacto" class="progress-dot" data-label="Contacto"></a>
+    </div>
+
+    <div id="menu-overlay">
+      <div class="engineering-grid opacity-20"></div>
+      <button id="btn-close-menu" class="btn-close-overlay">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="menu-content">
+        <div class="menu-left-info">
+          <div class="mb-16">
+            <div
+              class="text-xs font-black text-[#f61c69] tracking-[0.6em] uppercase mb-4 font-mono"
+            >
+              ./sys_identity
+            </div>
+            <div
+              class="text-5xl font-black text-white uppercase tracking-tighter mb-6"
+            >
+              Consultoría<br /><span class="text-gradient italic"
+                >Éxito e Innovación.</span
+              >
+            </div>
+            <div class="h-1 w-24 bg-[#f61c69]"></div>
+          </div>
+          <div class="space-y-8">
+            <p class="text-gray-400 text-lg font-light leading-snug">
+              Ingeniería de software dedicada al desarrollo de arquitecturas
+              digitales de alto impacto.
+            </p>
+          </div>
+          <div class="mt-auto flex gap-10">
+            <a
+              href="https://facebook.com/consultoriaCEI/"
+              target="_blank"
+              class="text-gray-600 hover:text-white transition-all text-xl"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              href="https://instagram.com/consultoria.cei/"
+              target="_blank"
+              class="text-gray-600 hover:text-white transition-all text-xl"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://www.tiktok.com/@devconcei"
+              target="_blank"
+              class="text-gray-600 hover:text-white transition-all text-xl"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+        </div>
+        <div class="menu-right-links">
+          <nav class="flex flex-col">
+            <a
+              href="#inicio"
+              class="menu-link-item"
+              data-index="01"
+              onclick="closeMenu()"
+              >Inicio</a
+            >
+            <a
+              href="#showroom"
+              class="menu-link-item"
+              data-index="02"
+              onclick="closeMenu()"
+              >Prototipos</a
+            >
+            <a
+              href="#quienes-somos"
+              class="menu-link-item"
+              data-index="03"
+              onclick="closeMenu()"
+              >Nosotros</a
+            >
+            <a
+              href="#mision"
+              class="menu-link-item"
+              data-index="04"
+              onclick="closeMenu()"
+              >Misión</a
+            >
+            <a
+              href="#contacto"
+              class="menu-link-item"
+              data-index="05"
+              onclick="closeMenu()"
+              >Contacto</a
+            >
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="main-site"
+      class="relative z-10 max-w-7xl mx-auto px-6 pt-24 sm:pt-40 pb-12"
+    >
+      <header id="inicio" class="mb-24 section-anchor">
+        <div class="max-w-4xl">
+          <span
+            class="text-[#f61c69] font-black text-[11px] tracking-[0.4em] mb-5 block uppercase opacity-80"
+            >Grupo de Ingeniería de Software</span
+          >
+          <h1
+            class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-tight mb-8 uppercase"
+          >
+            Consultoría<br /><span class="text-gradient italic"
+              >Éxito e Innovación.</span
+            >
+          </h1>
+          <p
+            class="text-gray-400 text-lg sm:text-2xl max-w-3xl font-light leading-relaxed mb-10 opacity-90"
+          >
+            Ingeniería de software enfocada en resultados. Desarrollamos
+            soluciones digitales robustas que impulsan el crecimiento real de
+            empresas y emprendedores.
+          </p>
+          <div class="flex gap-6">
+            <button
+              onclick="
+                document
+                  .getElementById('showroom')
+                  .scrollIntoView({ behavior: 'smooth' })
+              "
+              class="group flex items-center gap-4 text-white font-bold tracking-widest text-[11px] uppercase"
+            >
+              EXPLORAR PROTOTIPOS
+              <i
+                class="fas fa-arrow-right group-hover:translate-x-2 transition-transform text-[#f61c69]"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section id="showroom" class="mb-24 section-anchor">
+        <div class="mb-16 border-l-4 border-[#f61c69] pl-6">
+          <span
+            class="text-[#f61c69] font-black text-[10px] tracking-widest uppercase block mb-2 font-mono"
+            >./solutions_inventory</span
+          >
+          <h2
+            class="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter"
+          >
+            Prototipos
+          </h2>
+        </div>
+
+        <div class="space-y-32">
+          <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="w-full lg:w-2/5 order-2 lg:order-1">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-8 h-1 bg-[#f61c69]"></div>
+                <span
+                  class="text-[#f61c69] font-bold text-[10px] tracking-widest uppercase font-mono"
+                  >e-commerce</span
+                >
+              </div>
+              <h3
+                class="text-3xl sm:text-5xl font-black text-white mb-6 uppercase leading-none"
+              >
+                Nova Store<br />Platform
+              </h3>
+              <p
+                class="text-gray-400 text-base sm:text-lg leading-relaxed mb-10 max-w-md italic text-white/60"
+              >
+                Ecosistema de comercio unificado con carga ultrarrápida y
+                experiencias de compra basadas en diseño emocional.
+              </p>
+              <button
+                onclick="openDemo('shop')"
+                class="px-10 py-4 bg-[#f61c69] text-white rounded-xl font-black text-[10px] tracking-widest hover:scale-105 transition-all shadow-xl shadow-[#f61c69]/20 uppercase"
+              >
+                Detalles
+              </button>
+            </div>
+            <div class="w-full lg:w-3/5 order-1 lg:order-2">
+              <div class="bento-card p-4 sm:p-8 rounded-[40px] min-h-[300px] sm:min-h-[400px] lg:aspect-[16/10]">
+                <div class="mockup-ui-base p-3 sm:p-6">
+                  <div class="grid grid-cols-2 gap-6 h-full">
+                    <div
+                      class="product-card-mock h-40 flex flex-col justify-end"
+                    >
+                      <div class="h-2 w-2/3 bg-[#f61c69]/40 rounded-full"></div>
+                    </div>
+                    <div
+                      class="product-card-mock h-40 flex flex-col justify-end"
+                      style="animation-delay: 1s"
+                    >
+                      <div class="h-2 w-1/2 bg-white/10 rounded-full"></div>
+                    </div>
+                    <div
+                      class="col-span-2 h-24 bg-white/5 border border-white/5 rounded-2xl flex items-center px-6"
+                    >
+                      <div
+                        class="w-10 h-10 rounded-full border border-[#f61c69] flex items-center justify-center text-[#f61c69] text-xs font-bold font-mono animate-pulse"
+                      >
+                        98%
+                      </div>
+                      <div
+                        class="ml-4 flex-1 h-1 bg-white/10 rounded-full overflow-hidden"
+                      >
+                        <div class="h-full bg-[#f61c69] w-3/4"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20"
+          >
+            <div class="w-full lg:w-2/5">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-8 h-1 bg-[#f61c69]"></div>
+                <span
+                  class="text-[#f61c69] font-bold text-[10px] tracking-widest uppercase font-mono"
+                  >Education</span
+                >
+              </div>
+              <h3
+                class="text-3xl sm:text-5xl font-black text-white mb-6 uppercase leading-none"
+              >
+                CEI Academy
+              </h3>
+              <p
+                class="text-gray-400 text-base sm:text-lg leading-relaxed mb-10 max-w-md italic text-white/60"
+              >
+                Plataforma educativa con gestión modular de conocimiento,
+                analíticas de progreso y entorno de video integrado.
+              </p>
+              <button
+                onclick="openDemo('edu')"
+                class="px-10 py-4 border border-white/20 text-white rounded-xl font-black text-[10px] tracking-widest hover:bg-white/5 transition-all uppercase"
+              >
+                Ver Proyecto
+              </button>
+            </div>
+            <div class="w-full lg:w-3/5">
+              <div
+                class="bento-card p-4 sm:p-10 rounded-[40px] min-h-[300px] sm:min-h-[400px] lg:aspect-video flex flex-col justify-center items-center group overflow-hidden"
+              >
+                <div
+                  class="w-full aspect-[16/9] bg-[#0d1117] rounded-2xl border border-white/10 relative overflow-hidden flex flex-col justify-center items-center shadow-2xl"
+                >
+                  <div
+                    class="hologram-ring"
+                    style="width: clamp(120px, 40vw, 240px); height: clamp(120px, 40vw, 240px)"
+                  ></div>
+                  <div
+                    class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full bg-[#f61c69]/20 border-2 border-[#f61c69] flex items-center justify-center relative z-10 transition-transform group-hover:scale-110 duration-500"
+                  >
+                    <i class="fas fa-play text-[#f61c69] text-2xl sm:text-3xl lg:text-4xl ml-1 sm:ml-2"></i>
+                  </div>
+                  <div class="absolute bottom-4 sm:bottom-8 lg:bottom-10 w-[90%] sm:w-4/5 space-y-2 sm:space-y-4 px-2 sm:px-6 z-10">
+                    <div
+                      class="h-1 sm:h-1.5 w-full bg-white/10 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-gradient-to-r from-[#f61c69] to-[#ff8ba7] w-3/4 animate-pulse"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center opacity-40 text-[7px] sm:text-[9px] font-mono text-white tracking-widest"
+                    >
+                      <span>BUFFERING_STREAM...</span>
+                      <span class="hidden sm:inline">4K_ULTRA_HD</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main class="space-y-24">
+        <section id="quienes-somos" class="section-anchor pt-12">
+          <div class="mb-12">
+            <span
+              class="text-[#f61c69] font-black text-[10px] tracking-widest uppercase block mb-2"
+              >Identidad Técnica</span
+            >
+            <h2
+              class="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter"
+            >
+              Nosotros
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div
+              class="md:col-span-3 bento-card p-10 sm:p-14 rounded-[48px] group flex flex-col justify-between h-full"
+            >
+              <div class="engineering-grid"></div>
+              <div class="laser-scan"></div>
+              <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-8">
+                  <span
+                    class="px-2 py-1 bg-[#f61c69]/20 text-[#f61c69] font-mono text-[9px] border border-[#f61c69]/30 rounded uppercase tracking-widest"
+                    >LOG: 001_HISTORY</span
+                  >
+                  <div class="h-px flex-1 bg-white/10"></div>
+                </div>
+                <h3
+                  class="text-3xl font-black text-white mb-8 italic uppercase tracking-tighter"
+                >
+                  Nuestra Historia.
+                </h3>
+                <p
+                  class="text-gray-400 text-lg sm:text-xl font-light leading-relaxed max-w-3xl mb-12"
+                >
+                  Somos un grupo de ingenieros dedicados a la arquitectura de
+                  software de alto impacto. Nuestra trayectoria se consolidó en
+                  los últimos años de nuestra formación en la
+                  <span
+                    class="text-white font-bold underline decoration-[#f61c69] decoration-2 underline-offset-4"
+                    >UT Tecámac</span
+                  >, donde transformamos el conocimiento técnico en una visión
+                  empresarial:
+                  <span
+                    class="text-white font-bold underline decoration-[#f61c69] decoration-2 underline-offset-4"
+                    >CEI</span
+                  >. <br /><br />
+                  Nos especializamos en traducir necesidades complejas de
+                  constructoras, sectores educativos y emprendedores en código
+                  eficiente, escalable y rentable.
+                </p>
+              </div>
+              <div class="relative z-10">
+                <div class="loading-bar-container">
+                  <div class="loading-bar-shimmer"></div>
+                </div>
+                <div
+                  class="flex justify-between mt-2 text-[7px] font-mono uppercase text-gray-600 tracking-widest"
+                >
+                  <span>System_Integrity</span><span>Stable_Link</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="md:col-span-1 bento-card p-10 rounded-[40px] flex flex-col justify-center items-center text-center group bg-[#f61c69]/5 h-full"
+            >
+              <div class="absolute top-6 right-6 flex gap-1">
+                <div
+                  class="w-1.5 h-1.5 rounded-full bg-[#f61c69] animate-ping"
+                ></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#f61c69]"></div>
+              </div>
+              <span class="text-8xl font-black text-white tracking-tighter"
+                >3<span class="text-[#f61c69]">+</span></span
+              >
+              <span
+                class="text-[11px] font-bold text-gray-400 uppercase tracking-[0.3em] mt-4"
+                >Años de Trayectoria</span
+              >
+            </div>
+
+            <div class="md:col-span-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div
+                class="bento-card p-10 rounded-[40px] group flex flex-col justify-between h-72"
+              >
+                <div class="engineering-grid"></div>
+                <div class="laser-scan"></div>
+                <div class="relative z-10">
+                  <div class="flex justify-between items-start mb-6">
+                    <div
+                      class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center border border-white/10 group-hover:border-[#f61c69]/50 transition-colors"
+                    >
+                      <i class="fas fa-code text-[#f61c69]"></i>
+                    </div>
+                    <span
+                      class="font-mono text-[8px] text-gray-600 uppercase tracking-widest"
+                      >Module: 0xWeb</span
+                    >
+                  </div>
+                  <h4
+                    class="text-white font-black uppercase text-base mb-4 tracking-wider"
+                  >
+                    Web Architecture
+                  </h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">
+                    Sistemas escalables y aplicaciones de alta conversión bajo
+                    estándares modernos.
+                  </p>
+                </div>
+                <div class="relative z-10">
+                  <div class="loading-bar-container">
+                    <div class="loading-bar-shimmer"></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bento-card p-10 rounded-[40px] group flex flex-col justify-between h-72"
+              >
+                <div class="engineering-grid"></div>
+                <div class="laser-scan"></div>
+                <div class="relative z-10">
+                  <div class="flex justify-between items-start mb-6">
+                    <div
+                      class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center border border-white/10 group-hover:border-[#f61c69]/50 transition-colors"
+                    >
+                      <i class="fas fa-database text-[#f61c69]"></i>
+                    </div>
+                    <span
+                      class="font-mono text-[8px] text-gray-600 uppercase tracking-widest"
+                      >Module: 0xDB</span
+                    >
+                  </div>
+                  <h4
+                    class="text-white font-black uppercase text-base mb-4 tracking-wider"
+                  >
+                    Data Intelligence
+                  </h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">
+                    Administración estratégica y optimización de bases de datos
+                    industriales.
+                  </p>
+                </div>
+                <div class="relative z-10">
+                  <div class="loading-bar-container">
+                    <div class="loading-bar-shimmer"></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bento-card p-10 rounded-[40px] group flex flex-col justify-between h-72"
+              >
+                <div class="engineering-grid"></div>
+                <div class="laser-scan"></div>
+                <div class="relative z-10">
+                  <div class="flex justify-between items-start mb-6">
+                    <div
+                      class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center border border-white/10 group-hover:border-[#f61c69]/50 transition-colors"
+                    >
+                      <i class="fas fa-microchip text-[#f61c69]"></i>
+                    </div>
+                    <span
+                      class="font-mono text-[8px] text-gray-600 uppercase tracking-widest"
+                      >Module: 0xConsult</span
+                    >
+                  </div>
+                  <h4
+                    class="text-white font-black uppercase text-base mb-4 tracking-wider"
+                  >
+                    Tech Strategy
+                  </h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">
+                    Asesoramiento experto para la digitalización y éxito
+                    tecnológico de empresas.
+                  </p>
+                </div>
+                <div class="relative z-10">
+                  <div class="loading-bar-container">
+                    <div class="loading-bar-shimmer"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="mision"
+          class="grid grid-cols-1 md:grid-cols-2 gap-8 section-anchor"
+        >
+          <div
+            class="bento-card p-10 sm:p-14 rounded-[50px] group overflow-hidden"
+          >
+            <div class="engineering-grid"></div>
+            <div class="laser-scan"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-10">
+                <div
+                  class="w-14 h-14 bg-[#f61c69]/10 rounded-2xl flex items-center justify-center border border-[#f61c69]/20"
+                >
+                  <i class="fas fa-bullseye text-[#f61c69] text-2xl"></i>
+                </div>
+                <span
+                  class="font-mono text-[9px] text-[#f61c69] border border-[#f61c69]/30 px-3 py-1 rounded-full uppercase tracking-widest"
+                  >Core_Objective</span
+                >
+              </div>
+              <h3
+                class="text-3xl font-black text-white mb-6 uppercase tracking-tighter"
+              >
+                Misión
+              </h3>
+              <p
+                class="text-gray-400 italic font-light leading-relaxed text-lg sm:text-xl"
+              >
+                "Proveer soluciones de alta ingeniería que transformen los
+                desafíos tecnológicos en ventajas competitivas para empresas y
+                emprendedores."
+              </p>
+              <div
+                class="mt-12 pt-8 border-t border-white/5 flex items-center gap-4"
+              >
+                <div class="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
+                  <div
+                    class="h-full bg-gradient-to-r from-transparent via-[#f61c69] to-transparent w-full animate-[shimmer-move_2s_infinite]"
+                  ></div>
+                </div>
+                <span
+                  class="text-[8px] font-mono text-gray-600 uppercase tracking-widest"
+                  >STATUS: EXECUTING</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bento-card p-10 sm:p-14 rounded-[50px] group overflow-hidden"
+          >
+            <div class="engineering-grid opacity-20"></div>
+            <div class="laser-scan"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-10">
+                <div
+                  class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 group-hover:border-[#f61c69]/30 transition-colors"
+                >
+                  <i
+                    class="fas fa-eye text-white/50 group-hover:text-[#f61c69] transition-colors text-2xl"
+                  ></i>
+                </div>
+                <span
+                  class="font-mono text-[9px] text-gray-500 border border-white/10 px-3 py-1 rounded-full uppercase tracking-widest"
+                  >Future_Horizon</span
+                >
+              </div>
+              <h3
+                class="text-3xl font-black text-white mb-6 uppercase tracking-tighter"
+              >
+                Visión
+              </h3>
+              <p
+                class="text-gray-400 italic font-light leading-relaxed text-lg sm:text-xl"
+              >
+                "Consolidarnos como el referente de excelencia en consultoría
+                tecnológica a nivel nacional, siendo el socio estratégico de
+                confianza."
+              </p>
+              <div
+                class="mt-12 pt-8 border-t border-white/5 flex items-center gap-4"
+              >
+                <div
+                  class="flex-1 h-1 bg-white/20 rounded-full overflow-hidden"
+                >
+                  <div class="h-full bg-white/20 w-3/4"></div>
+                </div>
+                <span
+                  class="text-[8px] font-mono text-gray-600 uppercase tracking-widest"
+                  >PROGRESS: 75%</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contacto" class="py-12 section-anchor">
+          <div
+            class="flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+          >
+            <div class="lg:sticky lg:top-32 order-1 lg:order-none">
+              <span
+                class="text-[#f61c69] font-black text-[11px] tracking-[0.4em] mb-4 block uppercase opacity-80"
+                >Conexión Directa</span
+              >
+              <h2
+                class="text-5xl sm:text-7xl font-black text-white mb-10 uppercase tracking-tighter"
+              >
+                Hablemos de<br /><span class="text-gradient">Innovación.</span>
+              </h2>
+              <p
+                class="text-gray-400 text-lg sm:text-xl font-light mb-10 max-w-md italic text-white/60"
+              >
+                Transformamos ideas en activos digitales. Conecta con nosotros y
+                llevemos tu proyecto al siguiente nivel.
+              </p>
+            </div>
+            <div
+              class="phrase-container bento-card p-10 sm:p-20 rounded-[60px] relative group text-center order-2 lg:order-none"
+            >
+              <div class="engineering-grid opacity-20"></div>
+              <i class="fas fa-quote-left quote-icon quote-left"></i>
+              <i class="fas fa-quote-right quote-icon quote-right"></i>
+              <div
+                class="relative z-10 w-full flex flex-col justify-center h-full"
+              >
+                <h3
+                  id="phrase-text"
+                  class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight uppercase tracking-tighter cyber-glow phrase-visible"
+                >
+                  CONECTANDO VISIÓN...
+                </h3>
+              </div>
+            </div>
+            <div class="order-3 lg:order-none w-full lg:col-span-2 flex justify-center">
+              <div class="flex gap-8 items-center justify-center mt-8">
+                <div class="magnetic-wrap">
+                  <a
+                    href="https://facebook.com/consultoriaCEI/"
+                    target="_blank"
+                    class="w-12 h-12 rounded-full border border-gray-800 flex items-center justify-center text-gray-500 hover:text-[#f61c69] transition-all"
+                    ><i class="fab fa-facebook-f text-xl"></i
+                  ></a>
+                </div>
+                <div class="magnetic-wrap">
+                  <a
+                    href="https://instagram.com/consultoria.cei/"
+                    target="_blank"
+                    class="w-12 h-12 rounded-full border border-gray-800 flex items-center justify-center text-gray-500 hover:text-[#f61c69] transition-all"
+                    ><i class="fab fa-instagram text-xl"></i
+                  ></a>
+                </div>
+                <div class="magnetic-wrap">
+                  <a
+                    href="https://www.tiktok.com/@devconcei"
+                    target="_blank"
+                    class="w-12 h-12 rounded-full border border-gray-800 flex items-center justify-center text-gray-500 hover:text-[#f61c69] transition-all"
+                    ><i class="fab fa-tiktok text-xl"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p
+            class="text-center text-white/60 font-black text-[0.7rem] tracking-[0.4em] uppercase mt-24 mb-10"
+          >
+            &copy; 2026 CEI / CONSULTORÍA ÉXITO E INNOVACIÓN
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <div id="demo-overlay"></div>
+    <button
+      id="btn-close-demo"
+      class="close-demo-btn hidden"
+      onclick="closeDemo()"
+    >
+      CERRAR VISTA PREVIA
+    </button>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
