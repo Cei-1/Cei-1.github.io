@@ -483,3 +483,10 @@ body {
   display: inline-block;
   transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+/* Les constellations restent au-dessus du fond et sous les contenus. */
+body{position:relative;isolation:isolate;background:#0c1220}
+#background-canvas{z-index:0;pointer-events:none;background:linear-gradient(125deg,#0b1425,#111628 55%,#191225)}
+body>main,body>header,body>footer,body>.fixed-branding{position:relative;z-index:1}
+body>.fixed-branding{position:fixed;z-index:100}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
